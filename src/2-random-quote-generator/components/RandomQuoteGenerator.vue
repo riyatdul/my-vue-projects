@@ -17,10 +17,16 @@ const quotes = ref([
 ]);
 
 const currentQuote = ref({text: "", author: ""});
+let previousIndex = -1;
 
 const getRandomQuote = () => {
-    const randomIndex = Math.floor(Math.random() * quotes.value.length);
+    let randomIndex;
+    //loop until get is a randomIndex different before
+    do {
+        randomIndex = Math.floor(Math.random() * quotes.value.length);
+    } while (randomIndex === previousIndex);
     currentQuote.value = quotes.value[randomIndex];
+    previousIndex = randomIndex;
 };
 
 //Get a random quote when the component is mounted
